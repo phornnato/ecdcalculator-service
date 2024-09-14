@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edc-Calculator</title>
+    <link rel="icon" href="https://static.vecteezy.com/system/resources/previews/042/584/539/non_2x/ai-generated-fire-isolated-on-transparent-background-free-png.png">
+    <style>
+        * {
+            padding: 0;
+            margin: 2px;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            border-top: 2px solid;
+            padding: 10px;
+            text-align: center;
+            font-family: fantasy;
+            margin-top: 20px;
+            color: hsla(240, 100%, 50%, 0.638);
+            border-bottom: 2px solid;
+            border-left: 2px solid;
+            border-right: 2px solid;
+        }
+        .container {
+            margin-top: 20px;
+            padding: 5%;
+        }
+        .inform {
+            font-family: fantasy;
+            color: hsla(240, 100%, 50%, 0.638);
+            font-size: 30px;
+        }
+        .edc {
+            width: 100%;
+            padding: 15px;
+            border: 2px double hsla(60, 3%, 6%, 0.611);
+            border-radius: 2em;
+            color: black;
+            font-size: 20px;
+        }
+        .edc:hover {
+            background-color: hsla(0, 0%, 50%, 0.069);
+        }
+        .label {
+            color: blue;
+            font-family: battambang;
+            font-size: 20px;
+        }
+        #demo {
+            color: blue;
+            font-family: battambang;
+            font-size: 40px;
+        }
+        .btn {
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            border-radius: 2em;
+            border: none;
+            background-color: hsla(219, 100%, 50%, 0.53);
+            color: white;
+            font-size: 20px;
+        }
+        .btn:hover {
+            background-color: hsla(219, 100%, 50%, 0.602);
+        }
+        .btn:active {
+            background-color: hsla(219, 100%, 50%, 0.841);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10%;
+            }
+            .inform {
+                font-size: 24px;
+            }
+            .label {
+                font-size: 18px;
+            }
+            .edc {
+                font-size: 18px;
+                padding: 10px;
+            }
+            .btn {
+                font-size: 18px;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 15%;
+            }
+            .inform {
+                font-size: 20px;
+            }
+            .label {
+                font-size: 16px;
+            }
+            .edc {
+                font-size: 16px;
+                padding: 8px;
+            }
+            .btn {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="header">Welcome to our EDC Calculator Program</h1>
+    <div class="container">
+        <h2 class="inform"> Inform Us</h2>
+        <br>
+        <div>
+           <label class="label" for="oldedc">បញ្ជូលភ្លើងខែចាស់/ Enter old month</label>
+           <br>
+           <input type="text" id="oldedc" class="edc" required placeholder="Enter here">
+           <br><br>
+           <label class="label" for="newedc">បញ្ជូលភ្លើងខែថ្មី/ Enter new month</label>
+           <br>
+           <input type="text" id="newedc" class="edc" required placeholder="Enter here">
+           <br><br>
+           <label class="label" for="Hrent">បញ្ជូលថ្លៃផ្ទះ/ Rent Price</label>
+           <br>
+           <input type="text" id="Hrent" class="edc" required placeholder="Enter here">
+           <br><br>
+           <label class="label" for="Wrent">បញ្ជូលថ្លៃទឹក/ Water price</label>
+           <br>
+           <input type="text" id="Wrent" class="edc" required placeholder="Enter here">
+           <br><br>
+           <input type="button" value="​ បញ្ចូន / Submit" class="btn" onclick="calculate()">
+           <p id="demo"></p>
+           <p style="text-align: center; margin-top: 20px; margin-bottom: 0px;">@original: phorn horm </p>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            var oldmontvalue = Number(document.getElementById("oldedc").value);
+            var newmontvalue = Number(document.getElementById("newedc").value);
+            var houserent = Number(document.getElementById("Hrent").value);
+            var rentwater = Number(document.getElementById("Wrent").value); // Fixing rentwater ID
+
+            // Validate inputs
+            if (oldmontvalue >=newmontvalue) {
+               document.getElementById("demo").innerHTML = "សូមពិនិត្យមើលម្តងទៀត អ្នកវាយមិនត្រឹមត្រូវទេ​!";
+               
+            } else {
+                let ectric = newmontvalue - oldmontvalue;
+
+                let payEctricjKhr = ectric * 1000;
+                let payEctricjUsd = payEctricjKhr / 4000;
+
+                let totalPayUsd = payEctricjUsd + houserent + rentwater;
+                let totalPayKhr = totalPayUsd *4000;
+
+                document.getElementById("demo").innerHTML = 
+                    "Pay Usd: $" + totalPayUsd.toFixed(2) + "<br>" +
+                    "Pay Khr: " + totalPayKhr.toFixed(2) + "៛";
+
+            }
+        }
+    </script>
+</body>
+</html>
